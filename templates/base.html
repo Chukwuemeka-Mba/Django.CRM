@@ -11,10 +11,12 @@
 </head>
 <body>
     <div class="">
+        <div>
         {% include 'navbar.html' %}
         {% block content %}
         {% endblock content %}
-    </div>
+        </div>
     {% include "scripts.html" %}
+    </div>
 </body>
 </html>

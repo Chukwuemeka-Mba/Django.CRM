@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load tailwind_filters %}
 {% block content %}
 
 <section class="text-gray-400 bg-gray-900 body-font overflow-hidden">
@@ -21,7 +21,7 @@
         </div>
        <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
             <div class="flex">
                 <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Update Lead</button>
             </div>

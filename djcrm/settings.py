@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'leads',
-    'agents'
+    'agents',
+
+    #Third party apps
+    'crispy_forms',
+    "crispy_tailwind",
 ]
 
 MIDDLEWARE = [
@@ -132,3 +136,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_REDIRECT_URL = "/leads"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
