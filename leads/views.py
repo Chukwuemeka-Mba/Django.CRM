@@ -5,7 +5,7 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse 
 from django.views import generic
-from .models import Lead
+from .models import Agent, Lead
 from .forms import LeadModelForm, CustomUserCreationForm
 from agents.mixins import OrganisorAndLoginRequiredMixin
 
@@ -30,17 +30,30 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         user = self.request.user
-
         # initial queryset of leads for the entire organisation
         if user.is_organisor: 
-            queryset = Lead.objects.filter(organisation=user.userprofile)
+            queryset = Lead.objects.filter(organisation=user.userprofile).exclude(agent__isnull=True)
         else:
             queryset = Lead.objects.filter(organisation=user.agent.organisation)    
-            # filter 
+            # filter for the agent that is logged in
             queryset = queryset.filter(agent__user=user)
         
         
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(LeadListView, self).get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_organisor:
+            queryset = Lead.objects.filter (
+                organisation=user.userprofile,
+                agent__isnull=True
+            )
+            context.update({
+                "unassigned_leads": queryset
+            })
+        return context
+
 
 def lead_list(request):
     #return HttpResponse("Hello World")
@@ -134,6 +147,13 @@ class LeadDeleteView(OrganisorAndLoginRequiredMixin, generic.DeleteView):
         # initial queryset of leads for the entire organisation
         return Lead.objects.filter(organisation=user.userprofile)
    
+class AssignAgentView(OrganisorAndLoginRequiredMixin, generic.FormView):
+    template_name = "leads/assign_agent.html"
+    form_class = None
+
+    # def get_queryset(self):
+        
+
 
 # def lead_delete(request, pk):
 #     lead = Lead.objects.get(id=pk)

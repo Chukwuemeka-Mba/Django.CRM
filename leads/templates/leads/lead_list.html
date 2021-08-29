@@ -25,7 +25,7 @@
           </div>
           <div class="flex-grow">
             <h2 class="text-white text-lg title-font font-medium mb-3">{{ lead.first_name }} {{ lead.last_name }}</h2>
-            <p class="leading-relaxed text-base">This is one of our most useful leads. An agent is assigned to it and its details can be viewed below. Gastropub indxgo juice poutine.</p>
+            <p class="leading-relaxed text-base">An agent from Health Stacks has been assigned to this lead and its details can be viewed below. Pay attention to the company contact information.</p>
             <a href="{% url 'leads:lead-detail' lead.pk %}"class="mt-3 text-indigo-400 inline-flex items-center" >View this Lead
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
@@ -35,10 +35,38 @@
         </div>
       </div>
     {% endfor %}
+      
+    {% if unassigned_leads.exists %}
+    <div class="w-full mb-3 py-3">
+      <h1 class="flex mx-auto mt-10 text-white  py-2 px-8 mb-4 focus:outline-none  rounded text-lg" >Unassigned Leads</h1>
     </div>
-    {% if user.is_organisor %}
+    {% for lead in unassigned_leads %}
+    <div class="p-4 lg:w-1/2 md:w-full">
+      <div class="flex border-2 rounded-lg border-gray-800 p-8 sm:flex-row flex-col">
+        <div class="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-gray-800 text-indigo-400 flex-shrink-0">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-8 h-8" viewBox="0 0 24 24">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+          </svg>
+        </div>
+        <div class="flex-grow">
+          <h2 class="text-white text-lg title-font font-medium mb-3">{{ lead.first_name }} {{ lead.last_name }}</h2>
+          <p class="leading-relaxed text-base">This is one of our most useful leads. An agent from Health Stacks is assigned to it and its details can be viewed below. Pay good attention to company and contact information.</p>
+          <a href="{% url 'leads:lead-detail' lead.pk %}"class="mt-3 text-indigo-400 inline-flex items-center" >Assign an agent
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+  {% endif %}
+    </div>
+    
+    <!-- {% if user.is_organisor %}
         <a class="mx-auto" href="{% url 'leads:lead-create' %}"><button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Create a new Lead</button></a>
-    {% endif %}
+    {% endif %} -->
   </div>
 </section>
 
