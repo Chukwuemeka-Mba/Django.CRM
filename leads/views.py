@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse 
 from django.views import generic
 from .models import Agent, Lead
-from .forms import LeadModelForm, CustomUserCreationForm
+from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm
 from agents.mixins import OrganisorAndLoginRequiredMixin
 
 #function based views
@@ -149,9 +149,10 @@ class LeadDeleteView(OrganisorAndLoginRequiredMixin, generic.DeleteView):
    
 class AssignAgentView(OrganisorAndLoginRequiredMixin, generic.FormView):
     template_name = "leads/assign_agent.html"
-    form_class = None
+    form_class = AssignAgentForm
 
-    # def get_queryset(self):
+    def get_success_url(self):
+        return reverse("leads:lead-list")
         
 
 

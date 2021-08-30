@@ -51,7 +51,7 @@
         <div class="flex-grow">
           <h2 class="text-white text-lg title-font font-medium mb-3">{{ lead.first_name }} {{ lead.last_name }}</h2>
           <p class="leading-relaxed text-base">This is one of our most useful leads. An agent from Health Stacks is assigned to it and its details can be viewed below. Pay good attention to company and contact information.</p>
-          <a href="{% url 'leads:lead-detail' lead.pk %}"class="mt-3 text-indigo-400 inline-flex items-center" >Assign an agent
+          <a href="{% url 'leads:assign-agent' lead.pk %}"class="mt-3 text-indigo-400 inline-flex items-center" >Assign an agent
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
