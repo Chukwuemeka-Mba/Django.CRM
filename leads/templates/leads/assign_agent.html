@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
 {% block content %}
-    <a href="/leads"><h1> Go back to Leads </h1></a>
+    <a href="/leads"><h1 class="flex mx-auto text-gray-900  py-2 px-8 focus:outline-none  rounded text-lg"> Go back to Leads </h1></a>
     <hr />
-    <h1>Assign an agent to this lead/h1>
+    <h1 class="flex mx-auto mt-10 text-gray-900 py-2 px-8 focus:outline-none  rounded text-lg">Assign an agent to this lead</h1>
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Submit</button>
+        <button type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-6 my-6 focus:outline-none hover:bg-indigo-600 rounded">Submit</button>
     </form>
 {% endblock content %}

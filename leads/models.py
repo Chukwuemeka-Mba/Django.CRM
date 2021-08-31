@@ -1,3 +1,4 @@
+from os import name
 from django.db import models
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
@@ -29,6 +30,13 @@ class Agent(models.Model):
     
     def __str__(self):
         return self.user.email
+
+class Category(models.Model):
+    name = models.CharField(max_length=30) #New, Contacted, Converted, Unconverted
+
+    def __str__(self):
+        return self.name
+
 
 
 def post_user_created_signal(sender, instance, created, **kwargs):
